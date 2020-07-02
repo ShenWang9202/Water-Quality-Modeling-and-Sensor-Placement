@@ -424,7 +424,7 @@ end
 
 
 if(SENSORSELECT)
-%     [finalResultCell,finalOccupationTimePlusNodeID,achievedError] = analyzeSensorSelectionResult(sensorSelectionResult,NodeID4Legend,filenameSplit{1},sensorNumberArray);
+     [finalResultCell,finalOccupationTimePlusNodeID,achievedError] = analyzeSensorSelectionResult(sensorSelectionResult,NodeID4Legend,filenameSplit{1},sensorNumberArray);
     fileLongName = ['SensorSelction',num2str(Network),'_',num2str(COMPARE),'_',num2str(SENSORSELECT),'_',filenameSplit{1},'_','Expected',num2str(round(Expected_t)),'_',num2str(Hq_min),'min'];
     plotSensorSelectionResult_specific(sensorSelectionResult,NodeID4Legend,fileLongName,sensorNumberArray,Hq_min,SimutionTimeInMinute);
 end
