@@ -1,0 +1,34 @@
+[TITLE]
+AsIII-AsV-Chlorine reaction kinetic model
+for Morehead, KY WDS
+
+[OPTIONS]
+RATE_UNITS  MIN
+SOLVER      EUL
+TIMESTEP    60
+RTOL        1.E-3
+ATOL        1.E-3
+
+[SPECIES]
+; Type   Name      Units   RTol   ATol
+BULK    Chlorine  MG      1.E-3  1.E-3
+
+
+[COEFFICIENTS]
+  ;CONSTANT Kb   2.0833333E-4         ;Monochloramine decay rate coefficient 0.3/24/60=Free chlorine bulk decay rate == 0.3/day
+  CONSTANT Kb   6.9444444E-4         ;Monochloramine decay rate coefficient 1/24/60=Free chlorine bulk decay rate == 1/day
+
+
+[PIPES]
+	RATE Chlorine -Kb*Chlorine 
+
+[TANKS]
+	RATE Chlorine -Kb*Chlorine 
+
+
+[SOURCES]
+CONCEN    RESERVOIR-129	Chlorine	0.8
+
+[QUALITY]
+  ;Initial conditions (= 0 if not specified here)
+  NODE    RESERVOIR-129	 Chlorine   0.8

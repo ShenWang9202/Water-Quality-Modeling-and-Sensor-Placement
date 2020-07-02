@@ -1,0 +1,202 @@
+[TITLE]
+EPANET Example Network 3
+
+[JUNCTIONS]
+;ID              	Elev        	Demand      	Pattern         
+ 60              	0           	0           	                	;
+ 601             	0           	0           	                	;
+ 61              	0           	0           	                	;
+ 123             	11          	5           	2               	;
+ 1               	11          	1000        	                	;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ 4               	220.0       	                	;
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve
+ 2               	200         	10          	0           	60          	60          	0           	                	;
+
+[PIPES]
+;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ 60              	4               	60              	1231        	24          	140         	0           	Open  	;
+ 329             	61              	123             	45500       	30          	140         	0           	Open  	;
+ 330             	60              	601             	1           	30          	140         	0           	Closed	;
+ 333             	601             	61              	1           	30          	140         	0           	Open  	;
+ 1               	123             	1               	1000        	12          	100         	0           	Open  	;
+ 2               	2               	1               	1000        	12          	100         	0           	Open  	;
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+ 335             	60              	61              	HEAD 2	;
+
+[VALVES]
+;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
+
+[TAGS]
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+;
+ 1               	1.34        	1.94        	1.46        	1.44        	.76         	.92         
+ 1               	.85         	1.07        	.96         	1.1         	1.08        	1.19        
+ 1               	1.16        	1.08        	.96         	.83         	.79         	.74         
+ 1               	.64         	.64         	.85         	.96         	1.24        	1.67        
+;
+ 2               	0           	0           	0           	0           	0           	1219        
+ 2               	0           	0           	0           	1866        	1836        	1818        
+ 2               	1818        	1822        	1822        	1817        	1824        	1816        
+ 2               	1833        	1817        	1830        	1814        	1840        	1859        
+;
+ 3               	620         	620         	620         	620         	620         	360         
+ 3               	360         	0           	0           	0           	0           	360         
+ 3               	360         	360         	360         	360         	0           	0           
+ 3               	0           	0           	0           	0           	360         	360         
+;
+ 4               	1637        	1706        	1719        	1719        	1791        	1819        
+ 4               	1777        	1842        	1815        	1825        	1856        	1801        
+ 4               	1819        	1733        	1664        	1620        	1613        	1620        
+ 4               	1616        	1647        	1627        	1627        	1671        	1668        
+;
+ 5               	4439        	4531        	4511        	4582        	4531        	4582        
+ 5               	4572        	4613        	4643        	4643        	4592        	4613        
+ 5               	4531        	4521        	4449        	4439        	4449        	4460        
+ 5               	4439        	4419        	4368        	4399        	4470        	4480        
+
+[CURVES]
+;ID              	X-Value     	Y-Value
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: Pump curve for Pump 10
+ 1               	0           	104.        
+ 1               	2000.       	92.         
+ 1               	4000.       	63.         
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: Pump curve for Pump 335
+ 2               	0           	200.        
+ 2               	8000.       	138.        
+ 2               	14000.      	86.         
+
+[CONTROLS]
+Link 335 OPEN AT CLOCKTIME 6 am
+Link 330 CLOSED AT CLOCKTIME 6 am
+
+Link 335 CLOSED AT CLOCKTIME 7 am
+Link 330 OPEN AT CLOCKTIME 7 am
+
+
+Link 335 OPEN AT CLOCKTIME 10 am
+Link 330 CLOSED AT CLOCKTIME 10 am
+
+
+
+
+
+
+
+[RULES]
+
+
+
+
+
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+ 60              	0.5
+ 601             	0.5
+ 61              	0.5
+ 123             	0.5
+ 1               	0.5
+ 4               	0.8
+ 2               	0.5
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+ 4               	CONCEN      	0.8         	
+
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	-1
+ Global Wall           	0
+ Limiting Potential    	0
+ Roughness Correlation 	0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	24:00 
+ Hydraulic Timestep 	1:00 
+ Quality Timestep   	0:01 
+ Pattern Timestep   	1:00 
+ Pattern Start      	0:00 
+ Report Timestep    	0:01 
+ Report Start       	0:00 
+ Start ClockTime    	6 AM
+ Statistic          	NONE
+
+[REPORT]
+ Status             	No
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	GPM
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	1
+ Trials             	40
+ Accuracy           	0.001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	S5 mg/L
+ Diffusivity        	1
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node            	X-Coord         	Y-Coord
+ 60              	23.90           	29.94           
+ 601             	23.00           	29.49           
+ 61              	23.71           	29.03           
+ 123             	23.37           	27.31           
+ 1               	25.73           	27.27           
+ 4               	24.15           	31.06           
+ 2               	25.81           	28.64           
+
+[VERTICES]
+;Link            	X-Coord         	Y-Coord
+
+[LABELS]
+;X-Coord           Y-Coord          Label & Anchor Node
+ 25.00            31.10            "RIVER" 4               
+
+[BACKDROP]
+ DIMENSIONS     	6.16            	-1.55           	46.71           	32.61           
+ UNITS          	None
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+[END]

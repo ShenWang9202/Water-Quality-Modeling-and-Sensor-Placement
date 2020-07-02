@@ -1,0 +1,183 @@
+[TITLE]
+Self-designed 3-node netowrk
+
+[JUNCTIONS]
+;ID              	Elev        	Demand      	Pattern         
+ 2               	700         	2000        	pr3             	;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ 1               	700         	                	;
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve
+ 3               	904         	4           	0           	20          	80          	0           	                	;
+
+[PIPES]
+;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ 1               	2               	3               	1000        	12          	100         	0           	Open  	;
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+ 4               	1               	2               	HEAD pm4	SPEED 1	;
+
+[VALVES]
+;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
+
+[TAGS]
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+;
+ 3               	0.5         	1.3         	1.0         	1.2         
+;
+ pr3             	0.12        	0.2         	0.3         	0.4         
+;
+ 1               	0.5         	0.4         	0.3         	0.45        	0.5         	0.5         
+ 1               	1.3         	1.2         	1.3         	1.1         	1.4         	1.3         
+ 1               	0.9         	0.8         	1           	1.1         	0.9         	1.1         
+ 1               	1.2         	1.2         	1.3         	1.1         	1.3         	1.1         
+
+[CURVES]
+;ID              	X-Value     	Y-Value
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ pm1             	600         	150         
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: EFFICIENCY: EFFICIENCY: EFFICIENCY: PUMP: EFFICIENCY: 
+ ef2             	0           	40          
+ ef2             	100         	52.2222222222222
+ ef2             	200         	62.2222222222222
+ ef2             	300         	70          
+ ef2             	400         	75.5555555555556
+ ef2             	500         	78.8888888888889
+ ef2             	600         	80          
+ ef2             	700         	78.8888888888889
+ ef2             	800         	75.5555555555556
+ ef2             	900         	70          
+ ef2             	1000        	62.2222222222222
+ ef2             	1100        	52.2222222222222
+ ef2             	1200        	40          
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ pm2             	700         	250         
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ pm3             	0           	295.2756    
+ pm3             	475.5111745 	229.6588    
+ pm3             	792.5186242 	98.4252     
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ pm4             	0           	393.7008    
+ pm4             	475.5111745 	360.8924    
+ pm4             	1109.526074 	98.4252     
+
+[CONTROLS]
+LINK 4 1 AT TIME 0
+; LINK 9 0 AT TIME 4
+
+
+
+
+[RULES]
+
+
+
+
+
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0.5
+ Global Pattern     	pr3
+ Demand Charge      	0
+ Pump 	4               	Efficiency	ef2
+ Pump 	4               	Pattern   	pr3
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+ 2               	0
+ 1               	0.8
+ 3               	0
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+ 1               	CONCEN      	0.8         	
+
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+ Wall     	1               	0
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	-1
+ Global Wall           	-0.0
+ Limiting Potential    	0.0
+ Roughness Correlation 	0.0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	24:00 
+ Hydraulic Timestep 	1:00 
+ Quality Timestep   	0:01 
+ Pattern Timestep   	1:00 
+ Pattern Start      	0:00 
+ Report Timestep    	0:01 
+ Report Start       	0:00 
+ Start ClockTime    	12 am
+ Statistic          	NONE
+
+[REPORT]
+ Status             	Full
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	GPM
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	1
+ Trials             	40
+ Accuracy           	0.00001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	1
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	Chlorine mg/L
+ Diffusivity        	1.0
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node            	X-Coord         	Y-Coord
+ 2               	1214.38         	7243.02         
+ 1               	404.76          	7238.10         
+ 3               	1215.50         	7929.94         
+
+[VERTICES]
+;Link            	X-Coord         	Y-Coord
+
+[LABELS]
+;X-Coord           Y-Coord          Label & Anchor Node
+ 222.22           7595.24          "Source"                 
+ 714.29           7587.30          "PUMP"                 
+ 971.34           8450.11          "TANK"                 
+
+[BACKDROP]
+ DIMENSIONS     	0.00            	0.00            	10000.00        	10000.00        
+ UNITS          	None
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+[END]

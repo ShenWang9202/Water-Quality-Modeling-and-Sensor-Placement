@@ -1,0 +1,164 @@
+[TITLE]
+
+
+[JUNCTIONS]
+;ID              	Elev        	Demand      	Pattern         
+ 2               	700         	2000        	pr3             	;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ RESERVOIR-129   	700         	                	;
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve
+ 8               	904         	4           	0           	20          	80          	0           	                	;
+
+[PIPES]
+;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ 2               	2               	8               	1000        	12          	100         	0           	Open  	;
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+ 9               	RESERVOIR-129   	2               	HEAD pm4	SPEED 1	;
+
+[VALVES]
+;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
+
+[TAGS]
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+;ID              	Multipliers
+ pr3             	0.2         	0.5         	0.4         	0.7         
+
+[CURVES]
+;ID              	X-Value     	Y-Value
+;PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: PUMP: 
+ pm4             	0           	393.7008    
+ pm4             	475.5111745 	360.8924    
+ pm4             	1109.526074 	98.4252     
+
+[CONTROLS]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[RULES]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[ENERGY]
+ Global Efficiency  	75.000000
+ Global Price       	0
+ Demand Charge      	0.000000
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+ 2               	0
+ RESERVOIR-129               	0.8
+ 8               	0
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+ RESERVOIR-129               	CONCEN      	0.8
+ 
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+ Wall     	1               	0
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	-0.3
+ Global Wall           	-0.0
+ Limiting Potential    	0.0
+ Roughness Correlation 	0.0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	96:00 
+ Hydraulic Timestep 	0:30 
+ Quality Timestep   	0:01 
+ Pattern Timestep   	0:30 
+ Pattern Start      	0:00 
+ Report Timestep    	0:01 
+ Report Start       	0:00 
+ Start ClockTime    	8:00 AM
+ Statistic          	NONE
+
+[REPORT]
+ Status             	Full
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	GPM
+ Headloss           	H-W
+ Specific Gravity   	1.000000
+ Viscosity          	1.1e-005
+ Trials             	40
+ Accuracy           	0.005
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Stop
+ Pattern            	PATTERN-0
+ Demand Multiplier  	1.000000
+ Emitter Exponent   	0.500000
+ Quality            	Chlorine mg/L
+ Diffusivity        	1
+ Tolerance          	0.010000
+
+[COORDINATES]
+;Node            	X-Coord         	Y-Coord
+ 2               	862.27          	205.84          
+ RESERVOIR-129   	464.41          	216.93          
+ 8               	894.49          	386.23          
+
+[VERTICES]
+;Link            	X-Coord         	Y-Coord
+
+[LABELS]
+;X-Coord           Y-Coord          Label & Anchor Node
+
+[BACKDROP]
+ DIMENSIONS     	-1295.01        	-677.25         	27195.15        	14222.23        
+ UNITS          	None
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+[END]

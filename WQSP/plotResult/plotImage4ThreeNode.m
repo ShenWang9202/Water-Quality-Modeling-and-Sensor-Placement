@@ -1,0 +1,5 @@
+function plotImage4ThreeNode
+ 
+load('Network1_1_1_Three-node_1day_Expected2_5min.mat')
+fileLongName = 'Threenode_t5_5min_SSPaper';
+plotSensorSelectionResult_specific_3node(sensorSelectionResult,NodeID4Legend,fileLongName,sensorNumberArray,Hq_min,SimutionTimeInMinute);
