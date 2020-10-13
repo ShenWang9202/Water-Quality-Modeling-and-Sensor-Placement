@@ -58,31 +58,31 @@ sensorSolution = [];
 sensorSolution = [sensorSolution; zeroSensor'];
 lastUsesfulS = zeroSensor';
 
-% for r = sensorNumberArray
-%     r
-%     S = zeros(1,nPossibleSensor);
-%     S = EnhancedSearch4BestSensorLocation2(nPossibleSensor,O,r,sigma,lastUsesfulS);
-%     %     lastUsesfulS = S;
-%     sensorSolution = [sensorSolution; S];
-%     % install r sensors
-%     achieved(r+1) = Objective_logdetSpeedUp(O,S,sigma);
-% end
+maxSensorNumber = max(sensorNumberArray);
+for r = 1:maxSensorNumber
+    r
+    S = zeros(1,nPossibleSensor);
+    S = EnhancedSearch4BestSensorLocation2(nPossibleSensor,O,r,sigma,lastUsesfulS,x_inital4Hq);
+    sensorSolution = [sensorSolution; S];
+    % install r sensors
+    achieved(r+1) = Objective_logdetSpeedUp(O,S,sigma,x_inital4Hq);
+end
 
 % since we have observed the submodularity matching theory very well, we
 % can change the obove code into following to speed up the overall process
 % The idea is bacially save result for the previous step, and make it for
 % the next step
 
-maxSensorNumber = max(sensorNumberArray);
-for r = 1:maxSensorNumber
-    r
-    S = lastUsesfulS;
-    S = EnhancedSearch4BestSensorLocation2(nPossibleSensor,O,r,sigma,lastUsesfulS,x_inital4Hq);
-    lastUsesfulS = S;
-    sensorSolution = [sensorSolution; S];
-    % install r sensors
-    achieved(r+1) = Objective_logdetSpeedUp(O,S,sigma,x_inital4Hq);
-end
+% maxSensorNumber = max(sensorNumberArray);
+% for r = 1:maxSensorNumber
+%     r
+%     S = lastUsesfulS;
+%     S = EnhancedSearch4BestSensorLocation2(nPossibleSensor,O,r,sigma,lastUsesfulS,x_inital4Hq);
+%     lastUsesfulS = S;
+%     sensorSolution = [sensorSolution; S];
+%     % install r sensors
+%     achieved(r+1) = Objective_logdetSpeedUp(O,S,sigma,x_inital4Hq);
+% end
 
 
 % install 0 sensor

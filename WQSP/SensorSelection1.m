@@ -348,12 +348,38 @@ ylabel('Demand at junctions (GPM)')
 legend(NodeID4Legend)
 
 
+% xticklabels
+labelIndex = [];
+everyHowManyHours = 4;
+cellString = cell(1,int16(24/everyHowManyHours)+1);
+every60minutes = int16(everyHowManyHours*60/Hq_min);
+temp = 1;
 
-figure
-plot(Flow)
+for i = 0:every60minutes:288
+    labelIndex = [labelIndex i];
+    cellString{temp} =  strcat(num2str(i*Hq_min/60),'h');
+    temp = temp +1;
+end
+
+
+figure3 = figure
+plot(Flow,'LineWidth',2)
 legend(LinkID4Legend)
-xlabel('Time (minute)')
-ylabel('Flow rates in links (GPM)')
+% fontsize = 30;
+% labelIndex = labelIndex*5-60;
+% labelIndex = labelIndex(2:end);
+% xticks(labelIndex);
+% xticklabels(cellString(2:end));
+% xlim([0,1440])
+% set(gca, 'TickLabelInterpreter', 'latex','fontsize',fontsize);
+% xlabel('Time (minute)','FontSize',fontsize,'interpreter','latex')
+% %ylabel({'Relative error between ';'   EPANET and LDE'},'FontSize',fontsize,'interpreter','latex')
+% ylabel('Flow rates in links (GPM)','FontSize',fontsize,'interpreter','latex')
+% set(gcf,'PaperUnits','inches','PaperPosition',[0 0 16 6])
+
+% print(figure3,'Flow_rates','-depsc2','-r300');
+% print(figure3,'Flow_rates','-dpng','-r300');
+
 
 if(COMPARE)
     % find average data;
@@ -431,15 +457,15 @@ end
 
 
 if(SENSORSELECT)
-    fileName1 = ['SensorSelction',num2str(Network),'_',num2str(COMPARE),'_',num2str(SENSORSELECT),'_',filenameSplit{1},'_','Expected',num2str(round(Expected_t)),'_',num2str(Hq_min),'min','.mat']
+    fileName1 = ['SensorSelction',num2str(Network),'_',num2str(COMPARE),'_',num2str(SENSORSELECT),'_',filenameSplit{1},'_','Expected',num2str(round(Expected_t)),'_',num2str(Hq_min),'min','super','.mat']
     save(fileName1,'finalResultCell','finalOccupationTimePlusNodeID','achievedError')
 end
 
-fileName2 = ['Network',num2str(Network),'_',num2str(COMPARE),'_',num2str(SENSORSELECT),'_',filenameSplit{1},'_','Expected',num2str(round(Expected_t)),'_',num2str(Hq_min),'min','.mat']
+fileName2 = ['Network',num2str(Network),'_',num2str(COMPARE),'_',num2str(SENSORSELECT),'_',filenameSplit{1},'_','Expected',num2str(round(Expected_t)),'_',num2str(Hq_min),'min','super','.mat']
 save(fileName2);
 
 
-sound1 = load('gong.mat');
-sound(sound1.y,sound1.Fs);
+% sound1 = load('gong.mat');
+% sound(sound1.y,sound1.Fs);
 end
 
