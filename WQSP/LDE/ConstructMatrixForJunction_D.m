@@ -1,4 +1,4 @@
-function [A_J_New, B_J_New]= ConstructMatrixForJunction_D(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,A_J,B_J,aux)
+function [A_J_New, B_J_New]= ConstructMatrixForJunction_D(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,A_J,B_J,aux,JunctionDecayRate_step)
 
 %% find the inflows and outflows of each junctions
 JunctionCount = ElementCount.JunctionCount;
@@ -54,6 +54,17 @@ for i = 1:m % for each junction
         % find contribution of link
         [~,Col] = find(contributionC(i,:)~=0);
         [~,n] = size(Col);
+        if n == 0
+            % if the contribution from any pipe is zero, that is, this
+            % junction has no inflows or outflows, it is "frozen", and
+            % the concentration equals to the last segment before "frozen"
+            % happens. But there is no information to record when frozen
+            % happens and what is the flow direction in connecting pipes at the monment of
+            % frozen. An easy solution would be consider it as a segment of
+            % pipes with zero flow rate, and it just decays with a certain
+            % rate.
+            A_J(i,i) = 1 + JunctionDecayRate_step; % JunctionDecayRate_step
+        else
         for j=1:n
             [lastSegmentIndex,isPipe] = findIndexofLastorFirstSegment(Col(j),IndexInVar,flipped(Col(j)),NumberofSegment4Pipes);
             %lastSegmentIndex = findIndexofLastSegment(Col(j),IndexInVar);

@@ -69,14 +69,18 @@ EnergyMatrixPipe= MassEnergyMatrixWithDirection(PipeIndex,:);
 %A_P = ConstructMatrixForPipeNew_NoneFirstSeg_SpeedUp(delta_t,CurrentFlowWithDirection,EnergyMatrixPipe,ElementCount,IndexInVar,aux,PipeReactionCoeff);
 
 A_P = ConstructMatrixForPipeNew_NoneFirstSeg_SpeedUpUp(delta_t,CurrentFlowWithDirection,EnergyMatrixPipe,ElementCount,IndexInVar,aux,PipeReactionCoeff);
-%% for reservoirs
-A_R = ConstructMatrixForReservoir(ElementCount,IndexInVar);
+% for reservoirs
+ReservoirDecayRate_sec = PipeReactionCoeff(1); % all pipes has the same decay rate, and we just use the first one.
+ReservoirDecayRate_step = ReservoirDecayRate_sec * delta_t;
+A_R = ConstructMatrixForReservoir_Decay(ElementCount,IndexInVar,ReservoirDecayRate_step);
 B_R = sparse(ReservoirCount,nodeCount);
 
 %% for tanks
 [A_TK,B_TK,~] = ConstructMatrixForTank(delta_t,CurrentFlow,CurrentNodeTankVolume,TankMassMatrix,ElementCount,IndexInVar,aux,q_B,flipped);
 % for junctions in none D set
-[A_J, B_J] = ConstructMatrixForJunction_NoneD(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,aux);
+JunctionDecayRate_sec = PipeReactionCoeff(1); % all pipes has the same decay rate, and we just use the first one.
+JunctionDecayRate_step = JunctionDecayRate_sec * delta_t;
+[A_J, B_J] = ConstructMatrixForJunction_NoneD(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,aux,JunctionDecayRate_step);
 
 %% for Pumps
 % B_M = sparse(PumpCount,nodeCount);
@@ -92,7 +96,7 @@ EnergyMatrixPump= MassEnergyMatrix(PumpIndex,:);
 % EPAENT a little bit larger
 
 % we simply assume it as the same decay rate in pipes.
-PumpReactionCoeff = PipeReactionCoeff(1,1);
+PumpReactionCoeff = PipeReactionCoeff(1,1) * delta_t;
 Pump_CIndex = IndexInVar.Pump_CIndex;
 [A_M,B_M] = ConstructMatrixForPumpNew_Decay(EnergyMatrixPump,UpstreamNode_Amatrix,UpstreamNode_Bmatrix,PumpReactionCoeff,Pump_CIndex);
 
@@ -103,7 +107,7 @@ EnergyMatrixValve= MassEnergyMatrix(ValveIndex,:);
 % [A_W,B_W] = ConstructMatrixForValveNew(EnergyMatrixValve,UpstreamNode_Amatrix,UpstreamNode_Bmatrix);
 
 % This is considering a little bit decay
-ValveReactionCoeff = PipeReactionCoeff(1,1);
+ValveReactionCoeff = PipeReactionCoeff(1,1) * delta_t;
 Valve_CIndex = IndexInVar.Valve_CIndex;
 [A_W,B_W] = ConstructMatrixForValveNew_Decay(EnergyMatrixValve,UpstreamNode_Amatrix,UpstreamNode_Bmatrix,ValveReactionCoeff,Valve_CIndex);
 

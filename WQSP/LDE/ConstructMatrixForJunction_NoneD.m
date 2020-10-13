@@ -1,4 +1,4 @@
-function [A_J, B_J]= ConstructMatrixForJunction_NoneD(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,aux)
+function [A_J, B_J]= ConstructMatrixForJunction_NoneD(CurrentFlow,MassEnergyMatrix,flipped,ElementCount,IndexInVar,q_B,aux,JunctionDecayRate_step)
 % CurrentFlow = Flow(1,:);
 % CurrentFlow = CurrentFlow';
 JunctionCount = ElementCount.JunctionCount;
@@ -87,6 +87,7 @@ for i = 1:m % for each junction
                 end
             else % when it is pump or valve
                 A_J(i,lastSegmentIndex) = contributionC(i,Col(j));
+				A_J(i,i) = 1 + JunctionDecayRate_step; % make it decay a little bit to make A full rank and stable
             end
         end
     end
