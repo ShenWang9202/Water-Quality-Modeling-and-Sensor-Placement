@@ -10,6 +10,6 @@ The functions are in WQSP folder, and click "run" in Matlab after loading Main.m
 
 The readers are suggested to test 3-node example first to ensure that all environments are set up, and the running time for 3-node is about 1 mins.
 
-To help readers understand intuitively about the water quality modeling in state-space form and the observability (Gramian), a simple and clean Matlab file that shows step by step the observability (gramian) calculation, and the readers can execute the Matlab file step by step and check the results. The link is \url{https://github.com/ShenWang9202/Water-Quality-Modeling-and-Sensor-Placement/blob/master/WQSP/three-node-example.m}
+To help readers understand intuitively about the water quality modeling in state-space form and the observability (Gramian), a simple and clean Matlab file that shows step by step the observability (gramian) calculation, and the readers can execute the Matlab file step by step and check the results. The link is \url{https://github.com/ShenWang9202/Water-Quality-Modeling-and-Sensor-Placement/blob/master/WQSP/three_node_example.m}
 
 The networks in case studies are located in network/ folder.
